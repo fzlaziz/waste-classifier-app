@@ -1,0 +1,22 @@
+name: waste_classifier_app
+description: "A mobile Flutter app that allows users to capture or upload images of waste and receive classification results by communicating with the waste-classifier API."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  camera: ^0.11.1
+  http: ^1.4.0
+  image_picker: ^1.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
