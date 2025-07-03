@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'screens/home_screen.dart';
+import 'screens/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,7 @@ class WasteClassifierApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
       ),
-      home: HomeScreen(cameras: cameras),
+      home: MainScreen(cameras: cameras),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,11 +1,25 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.1.1:5000';
+  static const String _defaultBaseUrl = 'http://128.199.131.214:5000';
+  static const String _baseUrlKey = 'api_base_url';
+
+  Future<String> getBaseUrl() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_baseUrlKey) ?? _defaultBaseUrl;
+  }
+
+  Future<void> setBaseUrl(String url) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_baseUrlKey, url);
+  }
 
   Future<Map<String, dynamic>> classifyImage(File imageFile) async {
+    final baseUrl = await getBaseUrl();
+
     try {
       // Convert image to base64
       final bytes = await imageFile.readAsBytes();
@@ -40,6 +54,8 @@ class ApiService {
   }
 
   Future<bool> checkServerHealth() async {
+    final baseUrl = await getBaseUrl();
+
     try {
       final response = await http
           .get(Uri.parse('$baseUrl/health'))
